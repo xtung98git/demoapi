@@ -10,7 +10,7 @@ public class MonAnYeuThich implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "monan_id")
@@ -21,13 +21,6 @@ public class MonAnYeuThich implements Serializable {
     @Column(name = "day")
     private Date day;
 
-    public MonAn getMonAn() {
-        return monAn;
-    }
-
-    public void setMonAn(MonAn monAn) {
-        this.monAn = monAn;
-    }
 
     public Integer getId() {
         return id;
@@ -37,12 +30,12 @@ public class MonAnYeuThich implements Serializable {
         this.id = id;
     }
 
-    public Date getDay() {
-        return day;
+    public MonAn getMonAn() {
+        return monAn;
     }
 
-    public void setDay(Date day) {
-        this.day = day;
+    public void setMonAn(MonAn monAn) {
+        this.monAn = monAn;
     }
 
     public KhachHang getKhachHang() {
@@ -53,4 +46,11 @@ public class MonAnYeuThich implements Serializable {
         this.khachHang = khachHang;
     }
 
+    public Date getDay() {
+        return day;
+    }
+
+    public void setDay(Date day) {
+        this.day = day;
+    }
 }

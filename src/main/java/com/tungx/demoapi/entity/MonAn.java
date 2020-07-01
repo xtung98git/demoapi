@@ -2,6 +2,7 @@ package com.tungx.demoapi.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,8 @@ public class MonAn implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chuyenmuc_id")
     private ChuyenMuc chuyenMuc;
-
+    @Column(name = "tenFileAnh")
+    private  String tenFileAnh;
     public Integer getId() {
         return id;
     }
@@ -70,4 +72,14 @@ public class MonAn implements Serializable {
     public void setChuyenMuc(ChuyenMuc chuyenMuc) {
         this.chuyenMuc = chuyenMuc;
     }
+
+    public String getTenFileAnh() {
+        return tenFileAnh;
+    }
+
+    public void setTenFileAnh(String tenFileAnh) {
+        this.tenFileAnh = tenFileAnh;
+    }
+
+
 }

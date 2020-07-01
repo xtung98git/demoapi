@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IMonAnRepository {
     List<MonAn> findAllMonAnByChuyenMucId(Integer chuyenMucId);
+    List<MonAn> findAllMonAnByName(String name);
 }

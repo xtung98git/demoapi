@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class MonAnRepository extends BaseRepository<MonAn, Integer> implements IMonAnRepository{
+public class MonAnRepository extends BaseRepository<MonAn, Integer> implements IMonAnRepository {
     @Override
     public List<MonAn> findAllMonAnByChuyenMucId(Integer chuyenMucId) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -21,9 +21,27 @@ public class MonAnRepository extends BaseRepository<MonAn, Integer> implements I
         Root<MonAn> root = criteriaQuery.from(MonAn.class);
         Join<MonAn, ChuyenMuc> monAn = root.join("chuyenMuc");
         List<Predicate> predicates = new ArrayList<>();
-        if(chuyenMucId != null){
+        if (chuyenMucId != null) {
             Predicate predicate = criteriaBuilder.equal(monAn.get("id"), chuyenMucId);
             predicates.add(predicate);
+        }
+        criteriaQuery.where(predicates.toArray(new Predicate[]{}));
+        TypedQuery<MonAn> typedQuery = entityManager.createQuery(criteriaQuery.select(root));
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<MonAn> findAllMonAnByName(String name) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<MonAn> criteriaQuery = criteriaBuilder.createQuery(MonAn.class);
+        Root<MonAn> root = criteriaQuery.from(MonAn.class);
+        List<Predicate> predicates = new ArrayList<>();
+        if (name != null && name.length() >=2) {
+            Predicate predicate = criteriaBuilder.like(root.get("ten"), "%" + name + "%");
+            predicates.add(predicate);
+        }
+        else{
+            return new ArrayList<MonAn>();
         }
         criteriaQuery.where(predicates.toArray(new Predicate[]{}));
         TypedQuery<MonAn> typedQuery = entityManager.createQuery(criteriaQuery.select(root));

@@ -30,6 +30,11 @@ public class MonAnServiceImpl implements MonAnService {
     }
 
     @Override
+    public List<MonAn> findAllMonAnByName(String name) {
+        return monAnRepository.findAllMonAnByName(name);
+    }
+
+    @Override
     public MonAn findById(Integer id) {
         return monAnRepository.getById(id);
     }

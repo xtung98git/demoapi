@@ -64,7 +64,6 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     @Override
     public MonAnYeuThichDTO toDto(MonAnYeuThich entity) {
         MonAnYeuThichDTO monAnYeuThichDTO = new MonAnYeuThichDTO();
-        monAnYeuThichDTO.setId(entity.getId());
         monAnYeuThichDTO.setDay(entity.getDay());
         monAnYeuThichDTO.setMonAn(entity.getMonAn());
         monAnYeuThichDTO.setKhachHang(entity.getKhachHang());
