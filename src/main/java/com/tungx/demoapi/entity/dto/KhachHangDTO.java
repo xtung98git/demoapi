@@ -1,22 +1,18 @@
-package com.tungx.demoapi.entity;
+package com.tungx.demoapi.entity.dto;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import com.tungx.demoapi.entity.MonAnYeuThich;
+
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.util.List;
 
-@Entity
-@Table(name = "tblkhachhang")
-public class KhachHang implements Serializable {
+public class KhachHangDTO {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "ten")
     private String ten;
-    @Column(name = "idLinked", unique = true)
     private String idLinked;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "monanyeuthich_id")
     List<MonAnYeuThich> monAnYeuThichList;
 
     public Integer getId() {

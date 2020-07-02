@@ -1,12 +1,14 @@
 package com.tungx.demoapi.service.implement;
 
 import com.tungx.demoapi.entity.KhachHang;
+import com.tungx.demoapi.entity.dto.KhachHangDTO;
 import com.tungx.demoapi.repository.KhachHangRepository;
 import com.tungx.demoapi.service.KhachHangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -20,22 +22,59 @@ public class KhachHangServiceImpl implements KhachHangService {
     }
 
     @Override
-    public List<KhachHang> findAllKhachHang() {
-        return null;
+    public List<KhachHangDTO> findAllKhachHang() {
+        List<KhachHang> khachHangList = khachHangRepository.getAll();
+        List<KhachHangDTO> khachHangDTOList = new ArrayList<>();
+        for(int i=0; i<khachHangList.size(); i++){
+            khachHangDTOList.add(toDto(khachHangList.get(i)));
+        }
+        return khachHangDTOList;
     }
 
     @Override
-    public KhachHang findById(Integer id) {
-        return khachHangRepository.getById(id);
+    public List<KhachHangDTO> findKhachHangByLinkedId(String idLinked) {
+        List<KhachHang> khachHangList = khachHangRepository.findByLinkedId(idLinked);
+        List<KhachHangDTO> khachHangDTOList = new ArrayList<>();
+        for(int i=0; i<khachHangList.size(); i++){
+            khachHangDTOList.add(toDto(khachHangList.get(i)));
+        }
+        return khachHangDTOList;
     }
 
     @Override
-    public void save(KhachHang khachHang) {
-        khachHangRepository.add(khachHang);
+    public KhachHangDTO findById(Integer id) {
+        KhachHang khachHang = khachHangRepository.getById(id);
+        KhachHangDTO khachHangDTO = toDto(khachHang);
+        return khachHangDTO;
     }
 
     @Override
-    public void remove(KhachHang khachHang) {
-        khachHangRepository.delete(khachHang);
+    public void save(KhachHangDTO khachHangDTO) {
+        khachHangRepository.add(toEntity(khachHangDTO));
     }
+
+    @Override
+    public void remove(KhachHangDTO khachHangDTO) {
+        khachHangRepository.delete(toEntity(khachHangDTO));
+    }
+
+    @Override
+    public KhachHangDTO toDto(KhachHang entity) {
+        KhachHangDTO khachHangDTO= new KhachHangDTO();
+        khachHangDTO.setId(entity.getId());
+        khachHangDTO.setIdLinked(entity.getIdLinked());
+        khachHangDTO.setTen(entity.getTen());
+        khachHangDTO.setMonAnYeuThichList(entity.getMonAnYeuThichList());
+        return khachHangDTO;
+    }
+
+    @Override
+    public KhachHang toEntity(KhachHangDTO dto) {
+        KhachHang khachHang= new KhachHang();
+        khachHang.setIdLinked(dto.getIdLinked());
+        khachHang.setTen(dto.getTen());
+        khachHang.setMonAnYeuThichList(dto.getMonAnYeuThichList());
+        return khachHang;
+    }
+
 }

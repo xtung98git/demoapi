@@ -16,7 +16,7 @@ public class MonAn implements Serializable {
     private String ten;
     @Column(name = "moTa")
     private String moTa;
-    @Column(name = "congThuc")
+    @Column(name = "congThuc", columnDefinition="LONGTEXT")
     private String congThuc;
     @Column(name = "soNguoi")
     private Integer soNguoi;
