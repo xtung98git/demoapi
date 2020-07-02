@@ -24,3 +24,18 @@ lấy đường dẫn trong các file code ở src/main/com.tungx.demoapi.contro
             respone body: json
         - Link ảnh:
             /api/monan/image/tên ảnh
+    Chuyên mục:
+        - Lấy tất cả chuyên mục:
+            /api/cm/cmget
+            respone body: json
+    Khách hàng:
+        -Thêm khách hàng:
+            /api/khachhang/khachhangpost
+            request body: json Khách hàng
+            respone body: json Khách hàng
+       - Lấy tất cả khách hàng:
+            /api/khachhang/khachhangget
+            respone body: json Khách hàng
+       - Lấy khách hàng theo id liên kết:
+            /api/khachhang/khachhanggetByLinkedId
+            respone body: json Khách hàng

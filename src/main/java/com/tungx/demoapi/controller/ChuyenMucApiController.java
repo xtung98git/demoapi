@@ -22,7 +22,7 @@ public class ChuyenMucApiController {
 
     @GetMapping(value = "/cmget")
     @ResponseBody
-    public ResponseEntity<List<ChuyenMuc>> findAllMonAn() {
+    public ResponseEntity<List<ChuyenMuc>> findAllChuyenMuc() {
         List<ChuyenMuc> products = chuyenMucService.findAllChuyenMuc();
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
