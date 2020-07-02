@@ -2,6 +2,7 @@ package com.tungx.demoapi.controller;
 
 import com.tungx.demoapi.entity.MonAn;
 import com.tungx.demoapi.entity.Product;
+import com.tungx.demoapi.entity.dto.MonAnDTO;
 import com.tungx.demoapi.service.MonAnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,8 +30,8 @@ public class MonAnApiController {
 
     @GetMapping(value = "/monans")
     @ResponseBody
-    public ResponseEntity<List<MonAn>> findAllMonAn() {
-        List<MonAn> products = monAnService.findAllMonAn();
+    public ResponseEntity<List<MonAnDTO>> findAllMonAn() {
+        List<MonAnDTO> products = monAnService.findAllMonAn();
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -39,8 +40,8 @@ public class MonAnApiController {
 
     @GetMapping(value = "/monansbychuyenmuc")
     @ResponseBody
-    public ResponseEntity<List<MonAn>> findAllMonAnByChuyenMuc(@RequestParam("idcm") Integer chuyenMucId) {
-        List<MonAn> products = monAnService.findAllMonAnByChuyenMucId(chuyenMucId);
+    public ResponseEntity<List<MonAnDTO>> findAllMonAnByChuyenMuc(@RequestParam("idcm") Integer chuyenMucId) {
+        List<MonAnDTO> products = monAnService.findAllMonAnByChuyenMucId(chuyenMucId);
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -49,8 +50,8 @@ public class MonAnApiController {
 
     @GetMapping(value = "/monansbychuyenmuc1")
     @ResponseBody
-    public ResponseEntity<List<MonAn>> findAllMonAnByChuyenMuc1(@RequestBody Integer chuyenMucId) {
-        List<MonAn> products = monAnService.findAllMonAnByChuyenMucId(chuyenMucId);
+    public ResponseEntity<List<MonAnDTO>> findAllMonAnByChuyenMuc1(@RequestBody Integer chuyenMucId) {
+        List<MonAnDTO> products = monAnService.findAllMonAnByChuyenMucId(chuyenMucId);
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -58,9 +59,9 @@ public class MonAnApiController {
     }
     @GetMapping(value = "/monansbyten")
     @ResponseBody
-    public ResponseEntity<List<MonAn>> findAllMonAnByTen(@RequestParam("ten") String ten) {
+    public ResponseEntity<List<MonAnDTO>> findAllMonAnByTen(@RequestParam("ten") String ten) {
         System.out.println(ten);
-        List<MonAn> products = monAnService.findAllMonAnByName(ten);
+        List<MonAnDTO> products = monAnService.findAllMonAnByName(ten);
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -69,8 +70,8 @@ public class MonAnApiController {
 
     @GetMapping(value = "/monansbyten1")
     @ResponseBody
-    public ResponseEntity<List<MonAn>> findAllMonAnByTen1(@RequestBody String ten) {
-        List<MonAn> products = monAnService.findAllMonAnByName(ten);
+    public ResponseEntity<List<MonAnDTO>> findAllMonAnByTen1(@RequestBody String ten) {
+        List<MonAnDTO> products = monAnService.findAllMonAnByName(ten);
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

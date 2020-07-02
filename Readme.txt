@@ -20,5 +20,7 @@ lấy đường dẫn trong các file code ở src/main/com.tungx.demoapi.contro
             /api/monan/monansbyten?ten=x
         - Tìm kiếm món ăn (theo tên):
             /api/monan/monansbyten1
-            request body:
+            request body: json
             respone body: json
+        - Link ảnh:
+            /api/monan/image/tên ảnh
