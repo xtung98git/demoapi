@@ -13,7 +13,6 @@ public class KhachHangDTO {
     private Integer id;
     private String ten;
     private String idLinked;
-    List<MonAnYeuThich> monAnYeuThichList;
 
     public Integer getId() {
         return id;
@@ -39,11 +38,4 @@ public class KhachHangDTO {
         this.idLinked = idLinked;
     }
 
-    public List<MonAnYeuThich> getMonAnYeuThichList() {
-        return monAnYeuThichList;
-    }
-
-    public void setMonAnYeuThichList(List<MonAnYeuThich> monAnYeuThichList) {
-        this.monAnYeuThichList = monAnYeuThichList;
-    }
 }

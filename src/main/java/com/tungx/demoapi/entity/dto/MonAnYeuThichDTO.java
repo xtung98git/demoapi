@@ -11,7 +11,9 @@ public class MonAnYeuThichDTO implements Serializable {
 
     private Integer id;
     private Date day;
-    private MonAn monAn;
+    private int idMonAn;
+    private String tenMonAn;
+    private String urlAnhMonAn;
     private KhachHang khachHang;
 
     public Integer getId() {
@@ -30,12 +32,28 @@ public class MonAnYeuThichDTO implements Serializable {
         this.day = day;
     }
 
-    public MonAn getMonAn() {
-        return monAn;
+    public int getIdMonAn() {
+        return idMonAn;
     }
 
-    public void setMonAn(MonAn monAn) {
-        this.monAn = monAn;
+    public void setIdMonAn(int idMonAn) {
+        this.idMonAn = idMonAn;
+    }
+
+    public String getTenMonAn() {
+        return tenMonAn;
+    }
+
+    public void setTenMonAn(String tenMonAn) {
+        this.tenMonAn = tenMonAn;
+    }
+
+    public String getUrlAnhMonAn() {
+        return urlAnhMonAn;
+    }
+
+    public void setUrlAnhMonAn(String urlAnhMonAn) {
+        this.urlAnhMonAn = urlAnhMonAn;
     }
 
     public KhachHang getKhachHang() {

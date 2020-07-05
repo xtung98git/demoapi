@@ -50,6 +50,8 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Override
     public void save(KhachHangDTO khachHangDTO) {
+        if(findKhachHangByLinkedId(khachHangDTO.getIdLinked()).size()>0)
+            return;
         khachHangRepository.add(toEntity(khachHangDTO));
     }
 
@@ -64,7 +66,6 @@ public class KhachHangServiceImpl implements KhachHangService {
         khachHangDTO.setId(entity.getId());
         khachHangDTO.setIdLinked(entity.getIdLinked());
         khachHangDTO.setTen(entity.getTen());
-        khachHangDTO.setMonAnYeuThichList(entity.getMonAnYeuThichList());
         return khachHangDTO;
     }
 
@@ -73,7 +74,6 @@ public class KhachHangServiceImpl implements KhachHangService {
         KhachHang khachHang= new KhachHang();
         khachHang.setIdLinked(dto.getIdLinked());
         khachHang.setTen(dto.getTen());
-        khachHang.setMonAnYeuThichList(dto.getMonAnYeuThichList());
         return khachHang;
     }
 

@@ -15,9 +15,6 @@ public class KhachHang implements Serializable {
     private String ten;
     @Column(name = "idLinked", unique = true)
     private String idLinked;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "monanyeuthich_id")
-    List<MonAnYeuThich> monAnYeuThichList;
 
     public Integer getId() {
         return id;
@@ -43,11 +40,4 @@ public class KhachHang implements Serializable {
         this.idLinked = idLinked;
     }
 
-    public List<MonAnYeuThich> getMonAnYeuThichList() {
-        return monAnYeuThichList;
-    }
-
-    public void setMonAnYeuThichList(List<MonAnYeuThich> monAnYeuThichList) {
-        this.monAnYeuThichList = monAnYeuThichList;
-    }
 }

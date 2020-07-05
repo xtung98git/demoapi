@@ -1,10 +1,13 @@
 package com.tungx.demoapi.service.implement;
 
 import com.tungx.demoapi.entity.Comment;
+import com.tungx.demoapi.entity.MonAn;
 import com.tungx.demoapi.entity.MonAnYeuThich;
 import com.tungx.demoapi.entity.dto.CommentDTO;
 import com.tungx.demoapi.entity.dto.MonAnYeuThichDTO;
+import com.tungx.demoapi.repository.MonAnRepository;
 import com.tungx.demoapi.repository.MonAnYeuThichRepository;
+import com.tungx.demoapi.service.MonAnService;
 import com.tungx.demoapi.service.MonAnYeuThichService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +19,12 @@ import java.util.List;
 @Transactional
 public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     private MonAnYeuThichRepository monAnYeuThichRepository;
+    private MonAnRepository monAnRepository;
 
     @Autowired
-    public MonAnYeuThichServiceImpl(MonAnYeuThichRepository monAnYeuThichRepository) {
+    public MonAnYeuThichServiceImpl(MonAnYeuThichRepository monAnYeuThichRepository, MonAnRepository monAnRepository) {
         this.monAnYeuThichRepository = monAnYeuThichRepository;
+        this.monAnRepository = monAnRepository;
     }
 
     @Override
@@ -65,7 +70,9 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     public MonAnYeuThichDTO toDto(MonAnYeuThich entity) {
         MonAnYeuThichDTO monAnYeuThichDTO = new MonAnYeuThichDTO();
         monAnYeuThichDTO.setDay(entity.getDay());
-        monAnYeuThichDTO.setMonAn(entity.getMonAn());
+        monAnYeuThichDTO.setIdMonAn(entity.getMonAn().getId());
+        monAnYeuThichDTO.setTenMonAn(entity.getMonAn().getTen());
+        monAnYeuThichDTO.setUrlAnhMonAn(entity.getMonAn().getTenFileAnh());
         monAnYeuThichDTO.setKhachHang(entity.getKhachHang());
         return monAnYeuThichDTO;
     }
@@ -74,7 +81,8 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     public MonAnYeuThich toEntity(MonAnYeuThichDTO dto) {
         MonAnYeuThich monAnYeuThich = new MonAnYeuThich();
         monAnYeuThich.setDay(dto.getDay());
-        monAnYeuThich.setMonAn(dto.getMonAn());
+        MonAn monAn = monAnRepository.getById(dto.getIdMonAn());
+        monAnYeuThich.setMonAn(monAn);
         monAnYeuThich.setKhachHang(dto.getKhachHang());
         return monAnYeuThich;
     }
