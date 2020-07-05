@@ -15,6 +15,7 @@ public class MonAnDTO {
     private Integer soNguoi;
     private ChuyenMuc chuyenMuc;
     private String urlAnh;
+    private Long tongTien;
 
     public Integer getId() {
         return id;
@@ -70,5 +71,13 @@ public class MonAnDTO {
 
     public void setUrlAnh(String urlAnh) {
         this.urlAnh = urlAnh;
+    }
+
+    public Long getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(Long tongTien) {
+        this.tongTien = tongTien;
     }
 }

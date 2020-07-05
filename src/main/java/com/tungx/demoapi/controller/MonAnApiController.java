@@ -2,13 +2,16 @@ package com.tungx.demoapi.controller;
 
 import com.tungx.demoapi.entity.MonAn;
 import com.tungx.demoapi.entity.Product;
+import com.tungx.demoapi.entity.dto.CommentDTO;
 import com.tungx.demoapi.entity.dto.MonAnDTO;
 import com.tungx.demoapi.service.MonAnService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -98,5 +101,16 @@ public class MonAnApiController {
         } catch (IOException e) {
         }
         return new byte[0];
+    }
+    @GetMapping(value = "/tinhtien")
+    @ResponseBody
+    public ResponseEntity<String> tinhTien(
+            @RequestBody MonAnDTO monAnDTO, @RequestParam("songuoi") Integer songuoi,
+            UriComponentsBuilder builder) {
+        String products = "";
+        if (songuoi == null || monAnDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
