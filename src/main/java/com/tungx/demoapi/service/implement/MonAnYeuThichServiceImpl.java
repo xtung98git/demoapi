@@ -5,6 +5,7 @@ import com.tungx.demoapi.entity.KhachHang;
 import com.tungx.demoapi.entity.MonAn;
 import com.tungx.demoapi.entity.MonAnYeuThich;
 import com.tungx.demoapi.entity.dto.CommentDTO;
+import com.tungx.demoapi.entity.dto.MonAnDTO;
 import com.tungx.demoapi.entity.dto.MonAnYeuThichDTO;
 import com.tungx.demoapi.entity.dto.MonAnYeuThichDTOIn;
 import com.tungx.demoapi.repository.KhachHangRepository;
@@ -24,12 +25,14 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     private MonAnYeuThichRepository monAnYeuThichRepository;
     private MonAnRepository monAnRepository;
     private KhachHangRepository khachHangRepository;
+    private MonAnService monAnService;
 
     @Autowired
-    public MonAnYeuThichServiceImpl(MonAnYeuThichRepository monAnYeuThichRepository, MonAnRepository monAnRepository, KhachHangRepository khachHangRepository) {
+    public MonAnYeuThichServiceImpl(MonAnYeuThichRepository monAnYeuThichRepository, MonAnRepository monAnRepository, KhachHangRepository khachHangRepository, MonAnService monAnService) {
         this.monAnYeuThichRepository = monAnYeuThichRepository;
         this.monAnRepository = monAnRepository;
         this.khachHangRepository = khachHangRepository;
+        this.monAnService = monAnService;
     }
 
     @Override
@@ -43,11 +46,11 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     }
 
     @Override
-    public List<MonAnYeuThichDTO> findAllMonAnYeuThichByKhachHangId(Integer khachHangId) {
+    public List<MonAnDTO> findAllMonAnYeuThichByKhachHangId(Integer khachHangId) {
         List<MonAnYeuThich> monAnYeuThichList =  monAnYeuThichRepository.findAllByKhachHangId(khachHangId);
-        List<MonAnYeuThichDTO> monAnYeuThichDTOList = new ArrayList<>();
+        List<MonAnDTO> monAnYeuThichDTOList = new ArrayList<>();
         for(int i=0; i<monAnYeuThichList.size(); i++){
-            monAnYeuThichDTOList.add(toDto(monAnYeuThichList.get(i)));
+            monAnYeuThichDTOList.add(monAnService.toDto(monAnYeuThichList.get(i).getMonAn()));
         }
         return monAnYeuThichDTOList;
     }

@@ -3,6 +3,7 @@ package com.tungx.demoapi.controller;
 import com.tungx.demoapi.entity.MonAn;
 import com.tungx.demoapi.entity.MonAnYeuThich;
 import com.tungx.demoapi.entity.dto.CommentDTO;
+import com.tungx.demoapi.entity.dto.MonAnDTO;
 import com.tungx.demoapi.entity.dto.MonAnYeuThichDTO;
 import com.tungx.demoapi.entity.dto.MonAnYeuThichDTOIn;
 import com.tungx.demoapi.service.MonAnYeuThichService;
@@ -46,8 +47,8 @@ public class MonAnYeuThichApiController {
 
     @GetMapping(value = "/monanyeuthichsgetbykhachhangid")
     @ResponseBody
-    public ResponseEntity<List<MonAnYeuThichDTO>> findAllMonAnByChuyenMuc(@RequestParam("idkh") Integer khachHangId) {
-        List<MonAnYeuThichDTO> products = monAnYeuThichService.findAllMonAnYeuThichByKhachHangId(khachHangId);
+    public ResponseEntity<List<MonAnDTO>> findAllMonAnByChuyenMuc(@RequestParam("idkh") Integer khachHangId) {
+        List<MonAnDTO> products = monAnYeuThichService.findAllMonAnYeuThichByKhachHangId(khachHangId);
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -56,8 +57,8 @@ public class MonAnYeuThichApiController {
 
     @GetMapping(value = "/monanyeuthichsgetbykhachhangid1")
     @ResponseBody
-    public ResponseEntity<List<MonAnYeuThichDTO>> findAllMonAnByChuyenMuc1(@RequestBody Integer khachHangId) {
-        List<MonAnYeuThichDTO> products = monAnYeuThichService.findAllMonAnYeuThichByKhachHangId(khachHangId);
+    public ResponseEntity<List<MonAnDTO>> findAllMonAnByChuyenMuc1(@RequestBody Integer khachHangId) {
+        List<MonAnDTO> products = monAnYeuThichService.findAllMonAnYeuThichByKhachHangId(khachHangId);
         if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
