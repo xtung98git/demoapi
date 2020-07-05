@@ -1,10 +1,13 @@
 package com.tungx.demoapi.service.implement;
 
 import com.tungx.demoapi.entity.Comment;
+import com.tungx.demoapi.entity.KhachHang;
 import com.tungx.demoapi.entity.MonAn;
 import com.tungx.demoapi.entity.MonAnYeuThich;
 import com.tungx.demoapi.entity.dto.CommentDTO;
 import com.tungx.demoapi.entity.dto.MonAnYeuThichDTO;
+import com.tungx.demoapi.entity.dto.MonAnYeuThichDTOIn;
+import com.tungx.demoapi.repository.KhachHangRepository;
 import com.tungx.demoapi.repository.MonAnRepository;
 import com.tungx.demoapi.repository.MonAnYeuThichRepository;
 import com.tungx.demoapi.service.MonAnService;
@@ -20,11 +23,13 @@ import java.util.List;
 public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     private MonAnYeuThichRepository monAnYeuThichRepository;
     private MonAnRepository monAnRepository;
+    private KhachHangRepository khachHangRepository;
 
     @Autowired
-    public MonAnYeuThichServiceImpl(MonAnYeuThichRepository monAnYeuThichRepository, MonAnRepository monAnRepository) {
+    public MonAnYeuThichServiceImpl(MonAnYeuThichRepository monAnYeuThichRepository, MonAnRepository monAnRepository, KhachHangRepository khachHangRepository) {
         this.monAnYeuThichRepository = monAnYeuThichRepository;
         this.monAnRepository = monAnRepository;
+        this.khachHangRepository = khachHangRepository;
     }
 
     @Override
@@ -55,35 +60,32 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     }
 
     @Override
-    public void save(MonAnYeuThichDTO monAnYeuThichDTO) {
+    public void save(MonAnYeuThichDTOIn monAnYeuThichDTO) {
         MonAnYeuThich monAnYeuThich =  toEntity(monAnYeuThichDTO);
         monAnYeuThichRepository.add(monAnYeuThich);
     }
 
     @Override
     public void remove(MonAnYeuThichDTO monAnYeuThichDTO) {
-        MonAnYeuThich monAnYeuThich =  toEntity(monAnYeuThichDTO);
-        monAnYeuThichRepository.delete(monAnYeuThich);
+
     }
+
 
     @Override
     public MonAnYeuThichDTO toDto(MonAnYeuThich entity) {
         MonAnYeuThichDTO monAnYeuThichDTO = new MonAnYeuThichDTO();
-        monAnYeuThichDTO.setDay(entity.getDay());
-        monAnYeuThichDTO.setIdMonAn(entity.getMonAn().getId());
-        monAnYeuThichDTO.setTenMonAn(entity.getMonAn().getTen());
-        monAnYeuThichDTO.setUrlAnhMonAn(entity.getMonAn().getTenFileAnh());
-        monAnYeuThichDTO.setKhachHang(entity.getKhachHang());
+        monAnYeuThichDTO.setMonAn(entity.getMonAn());
         return monAnYeuThichDTO;
     }
 
     @Override
-    public MonAnYeuThich toEntity(MonAnYeuThichDTO dto) {
+    public MonAnYeuThich toEntity(MonAnYeuThichDTOIn dto) {
         MonAnYeuThich monAnYeuThich = new MonAnYeuThich();
         monAnYeuThich.setDay(dto.getDay());
         MonAn monAn = monAnRepository.getById(dto.getIdMonAn());
         monAnYeuThich.setMonAn(monAn);
-        monAnYeuThich.setKhachHang(dto.getKhachHang());
+        KhachHang khachHang = khachHangRepository.getById(dto.getIdKhachHang());
+        monAnYeuThich.setKhachHang(khachHang);
         return monAnYeuThich;
     }
 }

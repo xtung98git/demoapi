@@ -11,8 +11,8 @@ public class CommentDTO implements Serializable {
     private Integer id;
     private String noiDung;
     private Date ngayDang;
-    private KhachHang khachHang;
-    private MonAn monAn;
+    private Integer idKhachHang;
+    private Integer  idMonAn;
 
     public Integer getId() {
         return id;
@@ -38,19 +38,23 @@ public class CommentDTO implements Serializable {
         this.ngayDang = ngayDang;
     }
 
-    public KhachHang getKhachHang() {
-        return khachHang;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setKhachHang(KhachHang khachHang) {
-        this.khachHang = khachHang;
+    public Integer getIdKhachHang() {
+        return idKhachHang;
     }
 
-    public MonAn getMonAn() {
-        return monAn;
+    public void setIdKhachHang(Integer idKhachHang) {
+        this.idKhachHang = idKhachHang;
     }
 
-    public void setMonAn(MonAn monAn) {
-        this.monAn = monAn;
+    public Integer getIdMonAn() {
+        return idMonAn;
+    }
+
+    public void setIdMonAn(Integer idMonAn) {
+        this.idMonAn = idMonAn;
     }
 }

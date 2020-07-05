@@ -4,6 +4,7 @@ import com.tungx.demoapi.entity.MonAn;
 import com.tungx.demoapi.entity.MonAnYeuThich;
 import com.tungx.demoapi.entity.dto.CommentDTO;
 import com.tungx.demoapi.entity.dto.MonAnYeuThichDTO;
+import com.tungx.demoapi.entity.dto.MonAnYeuThichDTOIn;
 import com.tungx.demoapi.service.MonAnYeuThichService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -26,13 +27,11 @@ public class MonAnYeuThichApiController {
 
     @PostMapping(value = "/monanyeuthichspost")
     @ResponseBody
-    public ResponseEntity<MonAnYeuThichDTO> createComment(
-            @RequestBody MonAnYeuThichDTO comment,
+    public ResponseEntity<MonAnYeuThichDTOIn> createComment(
+            @RequestBody MonAnYeuThichDTOIn comment,
             UriComponentsBuilder builder) {
         monAnYeuThichService.save(comment);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/products/{id}")
-                .buildAndExpand(comment.getId()).toUri());
         return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
     @GetMapping(value = "/monanyeuthichsget")

@@ -1,8 +1,12 @@
 package com.tungx.demoapi.service.implement;
 
 import com.tungx.demoapi.entity.Comment;
+import com.tungx.demoapi.entity.KhachHang;
+import com.tungx.demoapi.entity.MonAn;
 import com.tungx.demoapi.entity.dto.CommentDTO;
 import com.tungx.demoapi.repository.CommentRepository;
+import com.tungx.demoapi.repository.KhachHangRepository;
+import com.tungx.demoapi.repository.MonAnRepository;
 import com.tungx.demoapi.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +24,14 @@ import java.util.Optional;
 @Transactional
 public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
+    private KhachHangRepository khachHangRepository;
+    private MonAnRepository monAnRepository;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, KhachHangRepository khachHangRepository, MonAnRepository monAnRepository) {
         this.commentRepository = commentRepository;
+        this.khachHangRepository = khachHangRepository;
+        this.monAnRepository = monAnRepository;
     }
 
     @Override
@@ -70,10 +78,11 @@ public class CommentServiceImpl implements CommentService {
     public Comment toEntity(CommentDTO dto) {
         Comment cmt = new Comment();
 //        cmt.setId(dto.getId());
-        cmt.setKhachHang(dto.getKhachHang());
-        cmt.setMonAn(dto.getMonAn());
+        KhachHang khachHang = khachHangRepository.getById(dto.getIdKhachHang());
+        cmt.setKhachHang(khachHang);
+        MonAn monAn = monAnRepository.getById(dto.getIdMonAn());
+        cmt.setMonAn(monAn);
         cmt.setNoiDung(dto.getNoiDung());
-        cmt.setMonAn(dto.getMonAn());
         return cmt;
     }
 
@@ -81,10 +90,9 @@ public class CommentServiceImpl implements CommentService {
     public CommentDTO toDto(Comment entity) {
         CommentDTO cmt = new CommentDTO();
         cmt.setId(entity.getId());
-        cmt.setKhachHang(entity.getKhachHang());
-        cmt.setMonAn(entity.getMonAn());
+        cmt.setIdKhachHang(entity.getKhachHang().getId());
         cmt.setNoiDung(entity.getNoiDung());
-        cmt.setMonAn(entity.getMonAn());
+        cmt.setIdMonAn(entity.getMonAn().getId());
         cmt.setNgayDang(entity.getNgayDang());
         return cmt;
     }
