@@ -12,6 +12,7 @@ public class CommentDTO implements Serializable {
     private String noiDung;
     private Date ngayDang;
     private Integer idKhachHang;
+    private String tenKhachHang;
     private Integer  idMonAn;
 
     public Integer getId() {
@@ -56,5 +57,13 @@ public class CommentDTO implements Serializable {
 
     public void setIdMonAn(Integer idMonAn) {
         this.idMonAn = idMonAn;
+    }
+
+    public String getTenKhachHang() {
+        return tenKhachHang;
+    }
+
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
     }
 }
