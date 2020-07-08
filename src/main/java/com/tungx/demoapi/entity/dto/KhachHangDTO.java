@@ -13,6 +13,7 @@ public class KhachHangDTO {
     private Integer id;
     private String ten;
     private String idLinked;
+    private String urlImage;
 
     public Integer getId() {
         return id;
@@ -38,4 +39,11 @@ public class KhachHangDTO {
         this.idLinked = idLinked;
     }
 
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
 }

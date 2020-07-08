@@ -13,6 +13,7 @@ public class CommentDTO implements Serializable {
     private Date ngayDang;
     private Integer idKhachHang;
     private String tenKhachHang;
+    private String urlImage;
     private Integer  idMonAn;
 
     public Integer getId() {
@@ -65,5 +66,13 @@ public class CommentDTO implements Serializable {
 
     public void setTenKhachHang(String tenKhachHang) {
         this.tenKhachHang = tenKhachHang;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }

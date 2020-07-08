@@ -78,6 +78,7 @@ public class CommentServiceImpl implements CommentService {
     public Comment toEntity(CommentDTO dto) {
         Comment cmt = new Comment();
 //        cmt.setId(dto.getId());
+        cmt.setNgayDang(dto.getNgayDang());
         KhachHang khachHang = khachHangRepository.getById(dto.getIdKhachHang());
         cmt.setKhachHang(khachHang);
         MonAn monAn = monAnRepository.getById(dto.getIdMonAn());
@@ -91,9 +92,11 @@ public class CommentServiceImpl implements CommentService {
         CommentDTO cmt = new CommentDTO();
         cmt.setId(entity.getId());
         cmt.setIdKhachHang(entity.getKhachHang().getId());
+        cmt.setTenKhachHang(entity.getKhachHang().getTen());
         cmt.setNoiDung(entity.getNoiDung());
         cmt.setIdMonAn(entity.getMonAn().getId());
         cmt.setNgayDang(entity.getNgayDang());
+        cmt.setUrlImage(entity.getKhachHang().getUrlImage());
         return cmt;
     }
 }

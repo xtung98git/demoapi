@@ -66,6 +66,7 @@ public class KhachHangServiceImpl implements KhachHangService {
         khachHangDTO.setId(entity.getId());
         khachHangDTO.setIdLinked(entity.getIdLinked());
         khachHangDTO.setTen(entity.getTen());
+        khachHangDTO.setUrlImage(entity.getUrlImage());
         return khachHangDTO;
     }
 
@@ -74,6 +75,7 @@ public class KhachHangServiceImpl implements KhachHangService {
         KhachHang khachHang= new KhachHang();
         khachHang.setIdLinked(dto.getIdLinked());
         khachHang.setTen(dto.getTen());
+        khachHang.setUrlImage(dto.getUrlImage());
         return khachHang;
     }
 

@@ -15,6 +15,8 @@ public class KhachHang implements Serializable {
     private String ten;
     @Column(name = "idLinked", unique = true)
     private String idLinked;
+    @Column(name = "urlImage")
+    private String urlImage;
 
     public Integer getId() {
         return id;
@@ -40,4 +42,11 @@ public class KhachHang implements Serializable {
         this.idLinked = idLinked;
     }
 
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
 }
