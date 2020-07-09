@@ -16,4 +16,5 @@ public interface MonAnYeuThichService {
     void remove(MonAnYeuThichDTO monAnYeuThichDTO);
     MonAnYeuThichDTO toDto(MonAnYeuThich entity);
     MonAnYeuThich toEntity(MonAnYeuThichDTOIn dto);
+    Boolean isExisted(Integer khId, Integer maId);
 }

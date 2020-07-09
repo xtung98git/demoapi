@@ -13,9 +13,9 @@ public class KhachHang implements Serializable {
     private Integer id;
     @Column(name = "ten")
     private String ten;
-    @Column(name = "idLinked", unique = true)
+    @Column(name = "idLinked", unique = true, columnDefinition="LONGTEXT")
     private String idLinked;
-    @Column(name = "urlImage")
+    @Column(name = "urlImage",  columnDefinition="LONGTEXT")
     private String urlImage;
 
     public Integer getId() {

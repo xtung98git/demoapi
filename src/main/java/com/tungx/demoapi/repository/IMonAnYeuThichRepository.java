@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IMonAnYeuThichRepository {
     List<MonAnYeuThich> findAllByKhachHangId(Integer khachHangId);
+    List<MonAnYeuThich> findByKhachHangAndMonAnId(Integer khachHangId, Integer monAnId);
 }

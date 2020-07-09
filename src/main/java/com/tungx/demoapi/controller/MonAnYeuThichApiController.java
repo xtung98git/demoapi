@@ -64,4 +64,13 @@ public class MonAnYeuThichApiController {
         }
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+    @GetMapping(value = "/checkexisted")
+    @ResponseBody
+    public ResponseEntity<Boolean> isExisted(@RequestParam("idkh") Integer khachHangId, @RequestParam("idma") Integer monAnId){
+        Boolean check = monAnYeuThichService.isExisted(khachHangId, monAnId);
+        if(check == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(check, HttpStatus.OK);
+    }
 }

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 @Transactional
 public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
@@ -37,9 +38,9 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
 
     @Override
     public List<MonAnYeuThichDTO> findAllMonAnYeuThich() {
-        List<MonAnYeuThich> monAnYeuThichList =  monAnYeuThichRepository.getAll();
+        List<MonAnYeuThich> monAnYeuThichList = monAnYeuThichRepository.getAll();
         List<MonAnYeuThichDTO> monAnYeuThichDTOList = new ArrayList<>();
-        for(int i=0; i<monAnYeuThichList.size(); i++){
+        for (int i = 0; i < monAnYeuThichList.size(); i++) {
             monAnYeuThichDTOList.add(toDto(monAnYeuThichList.get(i)));
         }
         return monAnYeuThichDTOList;
@@ -47,9 +48,9 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
 
     @Override
     public List<MonAnDTO> findAllMonAnYeuThichByKhachHangId(Integer khachHangId) {
-        List<MonAnYeuThich> monAnYeuThichList =  monAnYeuThichRepository.findAllByKhachHangId(khachHangId);
+        List<MonAnYeuThich> monAnYeuThichList = monAnYeuThichRepository.findAllByKhachHangId(khachHangId);
         List<MonAnDTO> monAnYeuThichDTOList = new ArrayList<>();
-        for(int i=0; i<monAnYeuThichList.size(); i++){
+        for (int i = 0; i < monAnYeuThichList.size(); i++) {
             monAnYeuThichDTOList.add(monAnService.toDto(monAnYeuThichList.get(i).getMonAn()));
         }
         return monAnYeuThichDTOList;
@@ -57,14 +58,20 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
 
     @Override
     public MonAnYeuThichDTO findById(Integer id) {
-        MonAnYeuThich monAnYeuThich =  monAnYeuThichRepository.getById(id);
+        MonAnYeuThich monAnYeuThich = monAnYeuThichRepository.getById(id);
         MonAnYeuThichDTO monAnYeuThichDTO = toDto(monAnYeuThich);
         return monAnYeuThichDTO;
     }
 
     @Override
     public void save(MonAnYeuThichDTOIn monAnYeuThichDTO) {
-        MonAnYeuThich monAnYeuThich =  toEntity(monAnYeuThichDTO);
+        List<MonAnYeuThich> listMonAnYeuThichs = monAnYeuThichRepository.findAllByKhachHangId(monAnYeuThichDTO.getIdKhachHang());
+        for (int i = 0; i < listMonAnYeuThichs.size(); i++) {
+            if (listMonAnYeuThichs.get(i).getMonAn().getId().equals(monAnYeuThichDTO.getIdMonAn())) {
+                return;
+            }
+        }
+        MonAnYeuThich monAnYeuThich = toEntity(monAnYeuThichDTO);
         monAnYeuThichRepository.add(monAnYeuThich);
     }
 
@@ -84,11 +91,22 @@ public class MonAnYeuThichServiceImpl implements MonAnYeuThichService {
     @Override
     public MonAnYeuThich toEntity(MonAnYeuThichDTOIn dto) {
         MonAnYeuThich monAnYeuThich = new MonAnYeuThich();
-        monAnYeuThich.setDay(dto.getDay());
+
         MonAn monAn = monAnRepository.getById(dto.getIdMonAn());
         monAnYeuThich.setMonAn(monAn);
         KhachHang khachHang = khachHangRepository.getById(dto.getIdKhachHang());
         monAnYeuThich.setKhachHang(khachHang);
         return monAnYeuThich;
+    }
+
+    @Override
+    public Boolean isExisted(Integer khId, Integer maId) {
+        List<MonAnYeuThich> list = monAnYeuThichRepository.findByKhachHangAndMonAnId(khId, maId);
+        if (list == null) {
+            return null;
+        } else if (list.size() == 0) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
     }
 }
